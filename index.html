@@ -2,340 +2,486 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>Youth Fund - Mitra Keuangan Terpercaya</title>
     
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    <!-- Google Fonts: Inter + Cormorant Garamond (untuk kesan premium) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Font Profesional ala Bank (Open Sans + Roboto) -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     
-    <!-- AOS Animation Library -->
+    <!-- AOS Animation -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
+        /* RESET TOTAL - ANTI CACAT MOBILE */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
         }
 
+        /* ROOT VARIABLES - PREMIUM COLOR PALETTE */
         :root {
-            --primary: #0a3442;
-            --primary-dark: #06212b;
-            --primary-light: #eef3f5;
-            --secondary: #8a7b6c;
-            --accent: #b58b5d;
-            --accent-light: #faf3ec;
-            --success: #2e7d5e;
+            --primary: #0a2c3b;
+            --primary-dark: #051f29;
+            --primary-soft: #1e4a5f;
+            --primary-light: #e3edf2;
+            --accent: #b68b5c;
+            --accent-dark: #9e7346;
+            --accent-light: #fbf4ea;
             --neutral-100: #ffffff;
-            --neutral-200: #f9fbfc;
-            --neutral-300: #f0f5f8;
-            --neutral-400: #e2eaf0;
-            --neutral-500: #b8ccd8;
-            --neutral-600: #8fa7b7;
-            --neutral-700: #5f7e91;
-            --neutral-800: #345569;
-            --neutral-900: #1e3845;
-            --shadow-xs: 0 2px 8px rgba(10, 52, 66, 0.04);
-            --shadow-sm: 0 4px 16px rgba(10, 52, 66, 0.06);
-            --shadow-md: 0 8px 30px rgba(10, 52, 66, 0.08);
-            --shadow-lg: 0 16px 48px rgba(10, 52, 66, 0.12);
-            --shadow-xl: 0 24px 64px rgba(10, 52, 66, 0.16);
-            --border-radius-sm: 12px;
-            --border-radius-md: 20px;
-            --border-radius-lg: 32px;
-            --border-radius-xl: 40px;
+            --neutral-200: #fafcfd;
+            --neutral-300: #f2f7fa;
+            --neutral-400: #e4ecf2;
+            --neutral-500: #c1d4e0;
+            --neutral-600: #95b1c4;
+            --neutral-700: #608197;
+            --neutral-800: #2c5369;
+            --neutral-900: #173544;
+            --shadow-xs: 0 4px 12px rgba(6, 35, 47, 0.06);
+            --shadow-sm: 0 8px 24px rgba(6, 35, 47, 0.08);
+            --shadow-md: 0 16px 40px rgba(6, 35, 47, 0.12);
+            --shadow-lg: 0 24px 56px rgba(6, 35, 47, 0.16);
+            --shadow-xl: 0 32px 72px rgba(6, 35, 47, 0.2);
+            --radius-sm: 16px;
+            --radius-md: 24px;
+            --radius-lg: 36px;
+            --radius-xl: 48px;
         }
 
+        /* BODY - FONT PROFESIONAL ALA BANK */
         body {
-            font-family: 'Inter', sans-serif;
-            background: var(--neutral-200);
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f5fafd 0%, #ecf3f8 100%);
             color: var(--neutral-800);
             line-height: 1.6;
             overflow-x: hidden;
+            width: 100%;
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* HEADING MENGGUNAKAN OPEN SANS - TEGAS & PROFESIONAL */
+        h1, h2, h3, h4, .logo-text h1, .story-title, .form-title, .total-value {
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.3px;
         }
 
         .container {
+            width: 100%;
             max-width: 640px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 20px;
         }
 
-        /* Premium Loading Animation */
+        /* ===== PREMIUM LOADING ANIMATION ===== */
         .loading-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--primary);
+            inset: 0;
+            background: linear-gradient(145deg, var(--primary) 0%, #1b5065 100%);
             z-index: 9999;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: opacity 0.6s ease, visibility 0.6s ease;
         }
-
         .loading-overlay.hidden {
             opacity: 0;
             visibility: hidden;
         }
-
         .loading-content {
             text-align: center;
+            animation: premiumFloat 2.2s infinite cubic-bezier(0.4, 0, 0.2, 1);
         }
-
         .loading-logo {
-            width: 100px;
-            height: 100px;
-            background: rgba(255,255,255,0.95);
-            border-radius: 30px;
+            width: 110px;
+            height: 110px;
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(8px);
+            border-radius: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 24px;
-            font-size: 48px;
-            font-weight: 700;
-            font-family: 'Cormorant Garamond', serif;
+            margin: 0 auto 28px;
+            font-size: 52px;
+            font-weight: 800;
+            font-family: 'Open Sans', sans-serif;
             color: var(--primary);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            animation: loadingPulse 2s infinite;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            border: 3px solid rgba(255,255,255,0.4);
+            animation: logoGlow 2s infinite alternate;
         }
-
         .loading-text {
             color: white;
-            font-size: 18px;
-            letter-spacing: 2px;
-            font-weight: 300;
-            opacity: 0;
-            animation: loadingFade 2s infinite;
+            font-size: 20px;
+            letter-spacing: 3px;
+            font-weight: 400;
+            font-family: 'Roboto', sans-serif;
+        }
+        .loading-text span {
+            font-weight: 700;
+            color: var(--accent);
+        }
+        @keyframes premiumFloat {
+            0%,100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-12px) scale(1.02); }
+        }
+        @keyframes logoGlow {
+            from { box-shadow: 0 25px 50px rgba(0,0,0,0.3); }
+            to { box-shadow: 0 35px 70px rgba(182, 139, 92, 0.4); }
         }
 
-        @keyframes loadingPulse {
-            0%, 100% {
-                transform: scale(1);
-                box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            }
-            50% {
-                transform: scale(1.05);
-                box-shadow: 0 30px 60px rgba(0,0,0,0.3);
-            }
-        }
-
-        @keyframes loadingFade {
-            0%, 100% {
-                opacity: 0.3;
-            }
-            50% {
-                opacity: 1;
-            }
-        }
-
-        /* Header Premium */
+        /* ===== HEADER DENGAN ANIMASI PREMIUM ===== */
         .header {
-            background: linear-gradient(165deg, var(--primary) 0%, #1a4d5e 100%);
+            background: linear-gradient(165deg, var(--primary) 0%, #205267 100%);
             color: white;
-            padding: 40px 0 60px;
-            border-bottom-left-radius: var(--border-radius-xl);
-            border-bottom-right-radius: var(--border-radius-xl);
-            position: relative;
+            padding: 36px 0 56px;
+            border-radius: 0 0 var(--radius-xl) var(--radius-xl);
             margin-bottom: 30px;
-            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            animation: headerReveal 1s ease-out;
         }
-
+        @keyframes headerReveal {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
         .header::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 0 L100 50 L50 100 L0 50 Z" fill="rgba(255,255,255,0.02)"/></svg>');
-            opacity: 0.1;
-            pointer-events: none;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: rotateSlow 25s infinite linear;
         }
-
         .header::after {
             content: '';
             position: absolute;
-            bottom: -1px;
+            bottom: 0;
             left: 0;
             right: 0;
-            height: 4px;
+            height: 2px;
             background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            animation: shimmer 3s infinite;
+        }
+        @keyframes rotateSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes shimmer {
+            0% { opacity: 0.3; transform: translateX(-100%); }
+            50% { opacity: 1; transform: translateX(0); }
+            100% { opacity: 0.3; transform: translateX(100%); }
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 16px;
-            margin-bottom: 32px;
+            gap: 18px;
+            margin-bottom: 30px;
             position: relative;
+            z-index: 3;
+            animation: slideInRight 0.8s ease-out;
         }
-
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
         .logo-icon {
             width: 60px;
             height: 60px;
             background: white;
-            border-radius: 18px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
-            font-weight: 700;
-            font-family: 'Cormorant Garamond', serif;
+            font-size: 34px;
+            font-weight: 800;
+            font-family: 'Open Sans', sans-serif;
             color: var(--primary);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-            border: 2px solid rgba(255,255,255,0.2);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+            border: 2px solid rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+            flex-shrink: 0;
         }
-
+        .logo-icon:hover {
+            transform: rotate(5deg) scale(1.05);
+        }
         .logo-text h1 {
-            font-family: 'Cormorant Garamond', serif;
             font-size: 36px;
-            font-weight: 700;
+            font-weight: 800;
             letter-spacing: -0.5px;
             line-height: 1.1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
-
         .logo-text .tagline {
-            font-size: 13px;
-            opacity: 0.8;
-            font-weight: 300;
-            letter-spacing: 1px;
+            font-size: 11px;
+            opacity: 0.85;
+            letter-spacing: 3px;
+            font-weight: 400;
+            font-family: 'Roboto', sans-serif;
+            margin-top: 5px;
         }
-
         .hero-quote {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 500;
-            line-height: 1.4;
-            margin: 24px 0 24px;
-            max-width: 90%;
+            line-height: 1.5;
+            margin: 25px 0 30px;
             color: rgba(255,255,255,0.95);
-            font-style: italic;
+            max-width: 90%;
+            position: relative;
+            z-index: 3;
+            animation: fadeInUp 0.9s ease-out 0.2s both;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            font-family: 'Roboto', sans-serif;
         }
-
         .hero-quote i {
             color: var(--accent);
-            margin-right: 8px;
-            font-size: 20px;
-            opacity: 0.8;
+            margin-right: 10px;
+            font-size: 22px;
         }
-
-        /* Trust Indicators */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
         .trust-badges {
             display: flex;
-            gap: 20px;
-            margin-top: 30px;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 20px;
+            position: relative;
+            z-index: 3;
+            animation: fadeIn 1s ease-out 0.4s both;
         }
-
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
         .trust-badge {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.12);
             backdrop-filter: blur(10px);
-            padding: 12px 20px;
-            border-radius: 40px;
-            font-size: 14px;
-            font-weight: 500;
+            -webkit-backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            border-radius: 60px;
+            font-size: 13px;
+            font-weight: 600;
             border: 1px solid rgba(255,255,255,0.2);
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 8px;
+            transition: all 0.3s ease;
+            font-family: 'Roboto', sans-serif;
+            letter-spacing: 0.3px;
         }
-
+        .trust-badge:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
         .trust-badge i {
             color: var(--accent);
+            font-size: 14px;
         }
 
-        /* Story Card Premium */
+        /* ===== STORY CARD DENGAN ANIMASI ===== */
         .story-card {
             background: white;
-            border-radius: var(--border-radius-xl);
-            padding: 40px;
+            border-radius: var(--radius-xl);
+            padding: 40px 32px;
             margin-bottom: 30px;
             box-shadow: var(--shadow-md);
             border: 1px solid var(--neutral-400);
             position: relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: cardAppear 0.8s ease-out;
+            overflow: hidden;
         }
-
+        @keyframes cardAppear {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
         .story-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             box-shadow: var(--shadow-xl);
+            border-color: var(--accent);
         }
-
         .story-card::before {
             content: '"';
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 160px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 180px;
             position: absolute;
-            top: -20px;
-            left: 20px;
+            top: -30px;
+            left: 10px;
             color: var(--neutral-400);
             opacity: 0.2;
-            z-index: 0;
+            line-height: 1;
+            transition: all 0.4s ease;
         }
-
+        .story-card:hover::before {
+            transform: rotate(5deg) scale(1.1);
+            opacity: 0.3;
+            color: var(--accent);
+        }
         .story-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 30px;
-            font-weight: 700;
+            font-size: 32px;
+            font-weight: 800;
             color: var(--primary);
             margin-bottom: 24px;
-            line-height: 1.3;
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
-
+        .story-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 70px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+            border-radius: 3px;
+            animation: lineExpand 1s ease-out 0.5s both;
+        }
+        @keyframes lineExpand {
+            from { width: 0; }
+            to { width: 70px; }
+        }
         .story-text {
             color: var(--neutral-700);
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             font-size: 16px;
+            line-height: 1.7;
             position: relative;
-            z-index: 1;
+            z-index: 2;
+            font-weight: 400;
+            font-family: 'Roboto', sans-serif;
         }
-
         .story-highlight {
-            background: var(--accent-light);
-            border-radius: 24px;
+            background: linear-gradient(145deg, var(--accent-light), white);
+            border-radius: 28px;
             padding: 28px;
-            margin: 30px 0 10px;
-            border: 1px solid rgba(181, 139, 93, 0.2);
+            margin-top: 28px;
+            border: 1px solid rgba(182, 139, 92, 0.2);
             position: relative;
-            z-index: 1;
+            z-index: 2;
+            transform: translateY(0);
+            transition: all 0.3s ease;
+            animation: highlightPulse 2s infinite;
         }
-
+        @keyframes highlightPulse {
+            0%,100% { box-shadow: 0 5px 15px rgba(182,139,92,0.1); }
+            50% { box-shadow: 0 10px 25px rgba(182,139,92,0.2); }
+        }
         .story-highlight p {
             font-style: italic;
             color: var(--neutral-800);
             font-size: 17px;
+            font-weight: 500;
+            line-height: 1.6;
+            font-family: 'Roboto', sans-serif;
         }
 
-        /* Value Cards Premium */
+        /* ===== TRUST SEAL DENGAN ANIMASI ===== */
+        .trust-seal {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 35px 0 25px;
+            padding: 18px 16px;
+            background: white;
+            border-radius: 80px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--neutral-400);
+            animation: sealSlide 0.8s ease-out;
+        }
+        @keyframes sealSlide {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .seal-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--neutral-700);
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+            padding: 5px 10px;
+            border-radius: 40px;
+            transition: all 0.3s ease;
+            font-family: 'Roboto', sans-serif;
+        }
+        .seal-item:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+            transform: scale(1.05);
+        }
+        .seal-item i {
+            color: var(--accent);
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+        .seal-item:hover i {
+            transform: rotate(5deg) scale(1.2);
+        }
+
+        /* ===== VALUE CARDS DENGAN ANIMASI PREMIUM ===== */
         .values-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin: 40px 0;
+            gap: 18px;
+            margin: 35px 0;
         }
-
         .value-card {
             background: white;
-            border-radius: 28px;
-            padding: 28px 20px;
+            border-radius: 30px;
+            padding: 28px 18px;
             text-align: center;
             border: 1px solid var(--neutral-400);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+            animation: valueCardFade 0.6s ease-out;
+            animation-fill-mode: both;
         }
-
+        .value-card:nth-child(1) { animation-delay: 0.1s; }
+        .value-card:nth-child(2) { animation-delay: 0.2s; }
+        .value-card:nth-child(3) { animation-delay: 0.3s; }
+        .value-card:nth-child(4) { animation-delay: 0.4s; }
+        @keyframes valueCardFade {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(182,139,92,0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+        .value-card:hover::before {
+            opacity: 1;
+        }
         .value-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-10px) scale(1.02);
             border-color: var(--accent);
             box-shadow: var(--shadow-lg);
         }
-
         .value-icon {
             width: 70px;
             height: 70px;
@@ -344,363 +490,374 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 20px;
+            margin: 0 auto 18px;
             color: var(--primary);
-            font-size: 30px;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(10, 52, 66, 0.1);
+            font-size: 32px;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(10,44,59,0.1);
         }
-
         .value-card:hover .value-icon {
             background: var(--primary);
             color: white;
-            transform: scale(1.1) rotate(5deg);
+            transform: rotate(8deg) scale(1.1);
+            box-shadow: 0 10px 20px rgba(10,44,59,0.2);
         }
-
         .value-card h3 {
             font-size: 18px;
             font-weight: 700;
             margin-bottom: 10px;
             color: var(--neutral-800);
+            font-family: 'Open Sans', sans-serif;
         }
-
         .value-card p {
             font-size: 13px;
             color: var(--neutral-600);
             line-height: 1.5;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
         }
 
-        /* Form Card Premium */
+        /* ===== FORM CARD DENGAN ANIMASI ===== */
         .form-card {
             background: white;
-            border-radius: var(--border-radius-xl);
-            padding: 40px 32px;
-            margin: 40px 0;
-            box-shadow: var(--shadow-lg);
+            border-radius: var(--radius-xl);
+            padding: 40px 28px;
+            margin: 45px 0;
+            box-shadow: var(--shadow-xl);
             border: 1px solid var(--neutral-400);
             position: relative;
             overflow: hidden;
+            animation: formReveal 0.9s ease-out;
         }
-
+        @keyframes formReveal {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
         .form-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent), var(--primary));
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent), var(--primary), var(--accent));
+            background-size: 300% 100%;
+            animation: gradientFlow 5s infinite linear;
         }
-
+        @keyframes gradientFlow {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 300% 0%; }
+        }
         .form-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 32px;
-            font-weight: 700;
+            font-size: 34px;
+            font-weight: 800;
             color: var(--primary);
             margin-bottom: 8px;
         }
-
         .form-description {
             color: var(--neutral-600);
-            margin-bottom: 40px;
+            margin-bottom: 35px;
             font-size: 15px;
-            border-left: 3px solid var(--accent);
-            padding-left: 16px;
+            border-left: 4px solid var(--accent);
+            padding-left: 18px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
         }
-
         .form-group {
-            margin-bottom: 24px;
+            margin-bottom: 22px;
+            animation: fieldSlide 0.5s ease-out;
+            animation-fill-mode: both;
         }
-
+        .form-group:nth-child(1) { animation-delay: 0.1s; }
+        .form-group:nth-child(2) { animation-delay: 0.15s; }
+        .form-group:nth-child(3) { animation-delay: 0.2s; }
+        @keyframes fieldSlide {
+            from { opacity: 0; transform: translateX(-15px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
         .form-group label {
             display: block;
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 13px;
+            font-weight: 700;
             color: var(--neutral-700);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            font-family: 'Roboto', sans-serif;
         }
-
         .form-group label i {
             color: var(--accent);
-            width: 22px;
-            margin-right: 8px;
+            width: 20px;
+            margin-right: 6px;
+            font-size: 14px;
         }
-
         .form-control {
             width: 100%;
-            padding: 18px 22px;
+            padding: 18px 20px;
             background: var(--neutral-200);
             border: 2px solid transparent;
-            border-radius: 18px;
-            font-size: 16px;
-            font-family: 'Inter', sans-serif;
+            border-radius: 20px;
+            font-size: 15px;
+            font-family: 'Roboto', sans-serif;
             transition: all 0.3s ease;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+            -webkit-appearance: none;
+            appearance: none;
+            font-weight: 400;
+            color: var(--neutral-800);
         }
-
-        .form-control:hover {
-            background: white;
-            border-color: var(--neutral-400);
-        }
-
         .form-control:focus {
             outline: none;
             background: white;
             border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(10, 52, 66, 0.1);
+            box-shadow: 0 0 0 4px rgba(10,44,59,0.1);
             transform: translateY(-2px);
         }
-
         select.form-control {
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235f7e91' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23608197' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
             background-repeat: no-repeat;
-            background-position: right 22px center;
+            background-position: right 20px center;
             background-size: 16px;
+            padding-right: 48px;
         }
-
         .row-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
         }
 
-        /* Total Card Premium */
+        /* ===== TOTAL CARD DENGAN ANIMASI ===== */
         .total-card {
             background: linear-gradient(145deg, var(--primary-light), white);
-            border-radius: 28px;
-            padding: 30px;
+            border-radius: 30px;
+            padding: 28px;
             margin: 30px 0 20px;
-            border: 1px solid rgba(10, 52, 66, 0.1);
-            box-shadow: inset 0 2px 4px rgba(255,255,255,0.8), 0 8px 20px rgba(10,52,66,0.05);
+            border: 1px solid rgba(10,44,59,0.1);
+            position: relative;
+            overflow: hidden;
+            animation: totalPop 0.7s ease-out;
         }
-
+        @keyframes totalPop {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .total-card::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -30%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(182,139,92,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: orbFloat 8s infinite ease-in-out;
+        }
+        @keyframes orbFloat {
+            0%,100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(-20px, 20px) rotate(120deg); }
+            66% { transform: translate(20px, -20px) rotate(240deg); }
+        }
         .total-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 14px 0;
-            border-bottom: 1px solid rgba(10, 52, 66, 0.1);
+            border-bottom: 1px solid rgba(10,44,59,0.1);
         }
-
-        .total-row:last-child {
+        .total-row:last-of-type {
             border-bottom: none;
         }
-
         .total-label {
             font-weight: 500;
             color: var(--neutral-700);
             display: flex;
             align-items: center;
             gap: 8px;
+            font-size: 15px;
+            font-family: 'Roboto', sans-serif;
         }
-
         .total-value {
             font-weight: 700;
             font-size: 20px;
             color: var(--primary-dark);
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Open Sans', sans-serif;
         }
-
         .total-highlight {
             background: white;
-            border-radius: 20px;
-            padding: 24px;
-            margin-top: 20px;
+            border-radius: 24px;
+            padding: 22px;
+            margin-top: 22px;
             text-align: center;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(10, 52, 66, 0.05);
+            border: 1px solid rgba(10,44,59,0.05);
+            position: relative;
+            overflow: hidden;
         }
-
         .total-highlight .total-label {
+            justify-content: center;
             font-size: 15px;
             margin-bottom: 8px;
-            justify-content: center;
         }
-
         .total-highlight .total-value {
-            font-size: 40px;
+            font-size: 42px;
             color: var(--primary);
+            line-height: 1.2;
+            animation: countPulse 2s infinite;
         }
-
+        @keyframes countPulse {
+            0%,100% { text-shadow: 0 0 10px rgba(182,139,92,0.2); }
+            50% { text-shadow: 0 0 20px rgba(182,139,92,0.4); }
+        }
         .info-badge {
-            display: inline-block;
             background: var(--accent-light);
-            padding: 6px 16px;
-            border-radius: 40px;
-            font-size: 13px;
-            color: var(--accent);
-            font-weight: 600;
-            margin-left: 8px;
-        }
-
-        /* Late Charge Card Premium */
-        .late-charge-card {
-            background: var(--neutral-300);
-            border-radius: 24px;
-            padding: 26px;
-            margin: 30px 0;
-            border: 1px solid var(--neutral-400);
-            position: relative;
-        }
-
-        .late-charge-card::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 20px;
-            bottom: 20px;
-            width: 4px;
-            background: var(--accent);
-            border-radius: 0 4px 4px 0;
-        }
-
-        .late-charge-title {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            padding: 5px 14px;
+            border-radius: 50px;
+            font-size: 11px;
             font-weight: 700;
-            color: var(--neutral-800);
-            margin-bottom: 20px;
-            font-size: 18px;
-            padding-left: 10px;
-        }
-
-        .late-charge-title i {
             color: var(--accent);
-            font-size: 22px;
+            margin-left: 10px;
+            white-space: nowrap;
+            font-family: 'Roboto', sans-serif;
+            letter-spacing: 0.3px;
         }
 
-        .late-charge-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 16px;
-            font-size: 15px;
-            padding-left: 10px;
-        }
-
-        .late-charge-label {
-            color: var(--neutral-700);
-        }
-
-        .late-charge-value {
-            font-weight: 700;
-            color: var(--primary);
+        /* ===== LATE CHARGE & JAMINAN CARD ===== */
+        .late-charge-card, .jaminan-card {
             background: white;
-            padding: 6px 16px;
-            border-radius: 40px;
-            font-size: 14px;
-        }
-
-        .late-example {
-            background: white;
-            border-radius: 16px;
-            padding: 18px;
-            margin-top: 20px;
-            font-size: 14px;
-            border: 1px dashed var(--neutral-400);
-        }
-
-        .late-example i {
-            color: var(--accent);
-            margin-right: 8px;
-        }
-
-        /* Jaminan Card Premium */
-        .jaminan-card {
-            background: white;
-            border-radius: 28px;
+            border-radius: 30px;
             padding: 30px;
             margin: 30px 0;
             border: 1px solid var(--neutral-400);
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            animation: cardSlide 0.7s ease-out;
         }
-
-        .jaminan-title {
+        @keyframes cardSlide {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .late-charge-card:hover, .jaminan-card:hover {
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+        .jaminan-title, .late-charge-title {
             display: flex;
             align-items: center;
             gap: 12px;
-            font-weight: 700;
+            font-weight: 800;
             color: var(--primary);
-            margin-bottom: 24px;
+            margin-bottom: 22px;
             font-size: 20px;
+            font-family: 'Open Sans', sans-serif;
         }
-
-        .jaminan-title i {
+        .jaminan-title i, .late-charge-title i {
             color: var(--accent);
             font-size: 24px;
+            animation: iconWiggle 3s infinite;
         }
-
-        .jaminan-list {
-            list-style: none;
+        @keyframes iconWiggle {
+            0%,100% { transform: rotate(0deg); }
+            5% { transform: rotate(10deg); }
+            10% { transform: rotate(-10deg); }
+            15% { transform: rotate(5deg); }
+            20% { transform: rotate(0deg); }
         }
-
         .jaminan-list li {
             display: flex;
             align-items: center;
             gap: 16px;
             margin-bottom: 20px;
             color: var(--neutral-700);
-            padding: 8px 0;
+            font-size: 15px;
             border-bottom: 1px dashed var(--neutral-400);
+            padding-bottom: 14px;
+            font-family: 'Roboto', sans-serif;
         }
-
         .jaminan-list li:last-child {
             border-bottom: none;
+            padding-bottom: 0;
         }
-
         .jaminan-list li i {
-            color: var(--success);
+            color: var(--accent);
             width: 22px;
             font-size: 18px;
         }
-
         .jaminan-diskusi {
-            margin-top: 24px;
+            background: linear-gradient(145deg, var(--accent-light), white);
             padding: 20px;
-            background: var(--accent-light);
-            border-radius: 18px;
+            border-radius: 22px;
             display: flex;
             align-items: center;
-            gap: 12px;
-            color: var(--neutral-800);
-            font-weight: 500;
-            border: 1px solid rgba(181, 139, 93, 0.2);
+            gap: 14px;
+            margin-top: 22px;
+            font-weight: 600;
+            font-size: 15px;
+            border: 1px solid rgba(182,139,92,0.2);
+            animation: gentlePulse 2.5s infinite;
         }
-
+        @keyframes gentlePulse {
+            0%,100% { background: var(--accent-light); }
+            50% { background: #fff7ef; }
+        }
         .jaminan-diskusi i {
             color: var(--accent);
             font-size: 22px;
         }
+        .jaminan-diskusi span {
+            font-family: 'Roboto', sans-serif;
+        }
+        .late-charge-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            font-size: 15px;
+            font-family: 'Roboto', sans-serif;
+        }
+        .late-charge-value {
+            background: var(--primary-light);
+            padding: 7px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 14px;
+        }
+        .late-example {
+            background: var(--neutral-200);
+            border-radius: 20px;
+            padding: 18px;
+            margin-top: 20px;
+            font-size: 14px;
+            border-left: 4px solid var(--accent);
+            font-family: 'Roboto', sans-serif;
+        }
 
-        /* Button Premium */
+        /* ===== BUTTON PREMIUM ===== */
         .btn {
             width: 100%;
             padding: 22px;
             border: none;
-            border-radius: 60px;
+            border-radius: 70px;
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 700;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 14px;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary {
             background: linear-gradient(145deg, var(--primary), var(--primary-dark));
             color: white;
-            box-shadow: 0 15px 30px rgba(10, 52, 66, 0.3);
+            box-shadow: 0 15px 35px rgba(10,44,59,0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Roboto', sans-serif;
+            letter-spacing: 0.5px;
+            margin-top: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
         }
-
-        .btn-primary::before {
+        .btn::before {
             content: '';
             position: absolute;
             top: 0;
@@ -708,130 +865,41 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s ease;
+            transition: left 0.6s ease;
         }
-
-        .btn-primary:hover::before {
+        .btn:hover::before {
             left: 100%;
         }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 20px 40px rgba(10, 52, 66, 0.4);
+        .btn:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(10,44,59,0.4);
+            background: linear-gradient(145deg, var(--primary-soft), var(--primary));
         }
-
-        .btn-primary:active {
-            transform: translateY(0);
-            box-shadow: 0 10px 20px rgba(10, 52, 66, 0.3);
+        .btn:active {
+            transform: translateY(0) scale(0.98);
         }
-
-        .btn-primary i {
+        .btn i {
             font-size: 22px;
             transition: transform 0.3s ease;
         }
-
-        .btn-primary:hover i {
-            transform: scale(1.2) rotate(5deg);
+        .btn:hover i {
+            transform: rotate(5deg) scale(1.2);
         }
-
         .disclaimer {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--neutral-500);
             text-align: center;
             margin-top: 24px;
+            font-family: 'Roboto', sans-serif;
+            letter-spacing: 0.2px;
         }
 
-        /* Footer Premium */
-        .footer {
-            background: var(--neutral-900);
-            color: white;
-            padding: 60px 0 40px;
-            border-top-left-radius: var(--border-radius-xl);
-            border-top-right-radius: var(--border-radius-xl);
-            margin-top: 60px;
-            position: relative;
-        }
-
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent), var(--primary-light));
-        }
-
-        .footer h4 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 26px;
-            margin-bottom: 20px;
-            color: white;
-        }
-
-        .footer p {
-            color: var(--neutral-500);
-            font-size: 14px;
-            margin-bottom: 30px;
-            line-height: 1.8;
-        }
-
-        .footer-contact {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 20px;
-            color: var(--neutral-400);
-            padding: 12px;
-            background: rgba(255,255,255,0.03);
-            border-radius: 16px;
-            transition: all 0.3s ease;
-        }
-
-        .footer-contact:hover {
-            background: rgba(255,255,255,0.06);
-            transform: translateX(5px);
-            color: white;
-        }
-
-        .footer-contact i {
-            width: 24px;
-            color: var(--accent);
-            font-size: 18px;
-        }
-
-        .jam-operasional {
-            color: var(--neutral-400);
-            font-size: 14px;
-            margin-top: 24px;
-            padding: 16px;
-            background: rgba(255,255,255,0.02);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .jam-operasional i {
-            color: var(--accent);
-            width: 24px;
-        }
-
-        .copyright {
-            text-align: center;
-            color: var(--neutral-600);
-            font-size: 13px;
-            margin-top: 50px;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-
-        /* Floating WA Premium */
+        /* ===== FLOATING WA PREMIUM ===== */
         .wa-float {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: linear-gradient(145deg, #25D366, #20b859);
+            bottom: 28px;
+            right: 28px;
+            background: linear-gradient(145deg, #25D366, #128C7E);
             width: 70px;
             height: 70px;
             border-radius: 35px;
@@ -839,206 +907,243 @@
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 32px;
-            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.3);
+            font-size: 34px;
+            box-shadow: 0 15px 35px rgba(37,211,102,0.3);
             z-index: 100;
-            text-decoration: none;
             border: 3px solid white;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            animation: float 3s infinite;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            animation: waPulse 2.5s infinite;
         }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-                box-shadow: 0 25px 40px rgba(37, 211, 102, 0.4);
-            }
+        @keyframes waPulse {
+            0%,100% { transform: scale(1); box-shadow: 0 15px 35px rgba(37,211,102,0.3); }
+            50% { transform: scale(1.1); box-shadow: 0 25px 50px rgba(37,211,102,0.5); }
         }
-
         .wa-float:hover {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 20px 40px rgba(37, 211, 102, 0.5);
+            transform: scale(1.15) rotate(5deg);
+            background: linear-gradient(145deg, #128C7E, #25D366);
+            animation: none;
+        }
+        .wa-float:active {
+            transform: scale(0.9);
         }
 
-        /* Trust Seal */
-        .trust-seal {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin: 40px 0 20px;
-            padding: 20px;
-            background: white;
-            border-radius: 60px;
-            box-shadow: var(--shadow-sm);
+        /* ===== FOOTER PREMIUM ===== */
+        .footer {
+            background: linear-gradient(145deg, var(--neutral-900) 0%, #1d4457 100%);
+            color: white;
+            padding: 55px 0 35px;
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+            margin-top: 55px;
+            position: relative;
+            overflow: hidden;
         }
-
-        .seal-item {
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+            animation: footerShimmer 3s infinite;
+        }
+        @keyframes footerShimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        .footer h4 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 18px;
+            color: white;
+            font-family: 'Open Sans', sans-serif;
+        }
+        .footer p {
+            color: var(--neutral-500);
+            font-size: 14px;
+            margin-bottom: 28px;
+            line-height: 1.7;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+        }
+        .footer-contact, .jam-operasional {
             display: flex;
             align-items: center;
-            gap: 10px;
-            color: var(--neutral-700);
-            font-size: 13px;
-            font-weight: 500;
+            gap: 18px;
+            margin-bottom: 18px;
+            color: var(--neutral-300);
+            padding: 14px 20px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 60px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.05);
+            font-family: 'Roboto', sans-serif;
         }
-
-        .seal-item i {
+        .footer-contact:hover, .jam-operasional:hover {
+            background: rgba(255,255,255,0.08);
+            transform: translateX(10px);
+            border-color: rgba(182,139,92,0.3);
+        }
+        .footer-contact i, .jam-operasional i {
             color: var(--accent);
+            width: 24px;
             font-size: 18px;
         }
+        .copyright {
+            text-align: center;
+            color: var(--neutral-600);
+            font-size: 12px;
+            margin-top: 45px;
+            padding-top: 28px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            font-family: 'Roboto', sans-serif;
+        }
 
-        /* Responsive */
-        @media (max-width: 480px) {
-            .values-grid {
-                gap: 12px;
+        /* ===== RESPONSIVE FIXES KHUSUS MOBILE ===== */
+        @media (max-width: 380px) {
+            .container { padding: 0 16px; }
+            .logo-icon { width: 52px; height: 52px; font-size: 30px; }
+            .logo-text h1 { font-size: 30px; }
+            .hero-quote { font-size: 20px; }
+            .trust-badge { padding: 8px 16px; font-size: 12px; }
+            .values-grid { gap: 14px; }
+            .value-card { padding: 22px 14px; }
+            .form-card { padding: 30px 18px; }
+            .total-highlight .total-value { font-size: 36px; }
+            .row-2 { grid-template-columns: 1fr; gap: 0; }
+        }
+
+        /* Safe area untuk iPhone notch */
+        @supports (padding: max(0px)) {
+            .header, .footer {
+                padding-left: max(24px, env(safe-area-inset-left));
+                padding-right: max(24px, env(safe-area-inset-right));
             }
-            
-            .value-card {
-                padding: 20px 15px;
-            }
-            
-            .trust-badges {
-                flex-wrap: wrap;
-            }
-            
-            .trust-seal {
-                flex-wrap: wrap;
-                gap: 15px;
+            .wa-float {
+                bottom: max(28px, env(safe-area-inset-bottom));
+                right: max(28px, env(safe-area-inset-right));
             }
         }
+
+        /* Hilangkan outline dan highlight */
+        input, select, button, a, .value-card, .trust-badge, .seal-item {
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+        /* Styling untuk select option di mobile */
+        select.form-control option {
+            font-family: 'Roboto', sans-serif;
+            font-size: 15px;
+        }
     </style>
-    
-    <!-- AOS Animation -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Premium Loading Animation -->
+    <!-- PREMIUM LOADING OVERLAY -->
     <div class="loading-overlay" id="loadingOverlay">
         <div class="loading-content">
             <div class="loading-logo">YF</div>
-            <div class="loading-text">Youth Fund</div>
+            <div class="loading-text">Youth <span>Fund</span></div>
         </div>
     </div>
 
-    <!-- Floating WhatsApp -->
-    <a href="https://wa.me/628895885691" class="wa-float" target="_blank">
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <div class="wa-float" id="waFloatBtn">
         <i class="fab fa-whatsapp"></i>
-    </a>
+    </div>
 
-    <!-- Header -->
-    <header class="header" data-aos="fade-down">
+    <!-- HEADER PREMIUM -->
+    <header class="header">
         <div class="container">
-            <div class="logo" data-aos="fade-right" data-aos-delay="100">
+            <div class="logo">
                 <div class="logo-icon">YF</div>
                 <div class="logo-text">
                     <h1>Youth Fund</h1>
                     <div class="tagline">MITRA KEUANGAN TERPERCAYA</div>
                 </div>
             </div>
-
-            <div class="hero-quote" data-aos="fade-up" data-aos-delay="200">
+            <div class="hero-quote">
                 <i class="fas fa-quote-left"></i> Memberikan solusi keuangan dengan prinsip transparansi dan saling menguntungkan.
             </div>
-
-            <!-- Trust Badges -->
-            <div class="trust-badges" data-aos="fade-up" data-aos-delay="300">
-                <div class="trust-badge">
-                    <i class="fas fa-check-circle"></i> 3 Tahun Melayani
-                </div>
-                <div class="trust-badge">
-                    <i class="fas fa-shield-alt"></i> 100% Amanah
-                </div>
-                <div class="trust-badge">
-                    <i class="fas fa-bolt"></i> Fast Respon
-                </div>
+            <div class="trust-badges">
+                <span class="trust-badge"><i class="fas fa-check-circle"></i> 3 Tahun Melayani</span>
+                <span class="trust-badge"><i class="fas fa-shield-alt"></i> 100% Amanah</span>
+                <span class="trust-badge"><i class="fas fa-bolt"></i> Fast Respon</span>
             </div>
         </div>
     </header>
 
     <main class="container">
-        <!-- Story Section -->
-        <section class="story-card" data-aos="fade-up">
-            <h2 class="story-title" data-aos="fade-right">Komitmen Kami</h2>
-            <p class="story-text" data-aos="fade-up" data-aos-delay="100">Setiap orang memiliki perjalanan finansialnya masing-masing. Ada yang membutuhkan tambahan modal untuk mengembangkan usaha, ada yang memerlukan dana cepat untuk kebutuhan mendesak, dan ada pula yang sedang merintis langkah baru.</p>
-            <p class="story-text" data-aos="fade-up" data-aos-delay="150">Youth Fund hadir sebagai mitra yang memahami bahwa setiap pinjaman adalah amanah. Kami berkomitmen untuk memberikan solusi dengan proses yang jelas, transparan, dan mengutamakan kepentingan bersama.</p>
-            
-            <div class="story-highlight" data-aos="zoom-in" data-aos-delay="200">
+        <!-- STORY CARD -->
+        <section class="story-card">
+            <h2 class="story-title">Komitmen Kami</h2>
+            <p class="story-text">Setiap orang memiliki perjalanan finansialnya masing-masing. Ada yang membutuhkan tambahan modal untuk mengembangkan usaha, ada yang memerlukan dana cepat untuk kebutuhan mendesak, dan ada pula yang sedang merintis langkah baru.</p>
+            <p class="story-text">Youth Fund hadir sebagai mitra yang memahami bahwa setiap pinjaman adalah amanah. Kami berkomitmen untuk memberikan solusi dengan proses yang jelas, transparan, dan mengutamakan kepentingan bersama.</p>
+            <div class="story-highlight">
                 <p>"Prinsip kami sederhana: pinjaman yang jelas, jaminan yang aman, dan hubungan yang saling menguntungkan."</p>
             </div>
         </section>
 
-        <!-- Trust Seal -->
-        <div class="trust-seal" data-aos="fade-up">
-            <div class="seal-item">
-                <i class="fas fa-file-contract"></i>
-                <span>Proses Transparan</span>
-            </div>
-            <div class="seal-item">
-                <i class="fas fa-handshake"></i>
-                <span>Negosiasi Jaminan</span>
-            </div>
-            <div class="seal-item">
-                <i class="fas fa-clock"></i>
-                <span>Cair Hari Ini</span>
-            </div>
+        <!-- TRUST SEAL -->
+        <div class="trust-seal">
+            <span class="seal-item"><i class="fas fa-file-contract"></i> Proses Transparan</span>
+            <span class="seal-item"><i class="fas fa-handshake"></i> Negosiasi Jaminan</span>
+            <span class="seal-item"><i class="fas fa-clock"></i> Cair Hari Ini</span>
         </div>
 
-        <!-- Value Cards -->
+        <!-- VALUE CARDS -->
         <div class="values-grid">
-            <div class="value-card" data-aos="flip-left" data-aos-delay="100">
+            <div class="value-card">
                 <div class="value-icon"><i class="fas fa-hand-holding-heart"></i></div>
                 <h3>Manusiawi</h3>
                 <p>Kami mendengarkan dan memahami kebutuhan Anda dengan empati</p>
             </div>
-            <div class="value-card" data-aos="flip-left" data-aos-delay="200">
+            <div class="value-card">
                 <div class="value-icon"><i class="fas fa-balance-scale"></i></div>
                 <h3>Transparan</h3>
                 <p>Tidak ada biaya tersembunyi, semua kesepakatan jelas di awal</p>
             </div>
-            <div class="value-card" data-aos="flip-left" data-aos-delay="300">
+            <div class="value-card">
                 <div class="value-icon"><i class="fas fa-bolt"></i></div>
                 <h3>Cepat</h3>
-                <p>Proses sederhana, pencairan dapat dilakukan di hari yang sama</p>
+                <p>Proses sederhana, pencairan di hari yang sama</p>
             </div>
-            <div class="value-card" data-aos="flip-left" data-aos-delay="400">
+            <div class="value-card">
                 <div class="value-icon"><i class="fas fa-shield-alt"></i></div>
                 <h3>Amanah</h3>
-                <p>Sistem jaminan yang melindungi kepentingan kedua belah pihak</p>
+                <p>Sistem jaminan yang melindungi kepentingan bersama</p>
             </div>
         </div>
 
-        <!-- Form Card -->
-        <div class="form-card" data-aos="fade-up">
-            <h3 class="form-title" data-aos="fade-right">Ajukan Pinjaman</h3>
-            <p class="form-description" data-aos="fade-right" data-aos-delay="50">Isi form berikut, tim kami akan segera menghubungi Anda melalui WhatsApp untuk diskusi lebih lanjut.</p>
+        <!-- FORM CARD -->
+        <div class="form-card">
+            <h3 class="form-title">Ajukan Pinjaman</h3>
+            <p class="form-description">Isi form berikut, tim kami akan segera menghubungi Anda via WhatsApp untuk diskusi lebih lanjut.</p>
 
             <form id="loanForm">
-                <div class="form-group" data-aos="fade-up" data-aos-delay="100">
+                <div class="form-group">
                     <label><i class="fas fa-user"></i> Nama Lengkap</label>
                     <input type="text" class="form-control" id="nama" required>
                 </div>
-
                 <div class="row-2">
-                    <div class="form-group" data-aos="fade-up" data-aos-delay="150">
-                        <label><i class="fas fa-phone-alt"></i> Nomor WhatsApp</label>
+                    <div class="form-group">
+                        <label><i class="fas fa-phone-alt"></i> No. WhatsApp</label>
                         <input type="tel" class="form-control" id="wa" required>
                     </div>
-                    <div class="form-group" data-aos="fade-up" data-aos-delay="175">
+                    <div class="form-group">
                         <label><i class="fas fa-calendar-alt"></i> Usia</label>
                         <input type="number" class="form-control" id="usia" required>
                     </div>
                 </div>
-
-                <div class="form-group" data-aos="fade-up" data-aos-delay="200">
+                <div class="form-group">
                     <label><i class="fas fa-map-marker-alt"></i> Domisili</label>
                     <input type="text" class="form-control" id="domisili" required>
                 </div>
-
                 <div class="row-2">
-                    <div class="form-group" data-aos="fade-up" data-aos-delay="250">
+                    <div class="form-group">
                         <label><i class="fas fa-money-bill-wave"></i> Jumlah Pinjaman</label>
                         <select class="form-control" id="jumlah" required onchange="updateTotal()">
                             <option value="" disabled selected>Pilih nominal</option>
@@ -1053,16 +1158,14 @@
                             <option value="1000000">Rp 1.000.000</option>
                         </select>
                     </div>
-                    <div class="form-group" data-aos="fade-up" data-aos-delay="275">
+                    <div class="form-group">
                         <label><i class="fas fa-clock"></i> Tenor</label>
                         <select class="form-control" id="tenor" required>
-                            <option value="" disabled selected>Pilih tenor</option>
-                            <option value="30 hari">30 Hari</option>
+                            <option value="30 Hari" selected>30 Hari</option>
                         </select>
                     </div>
                 </div>
-
-                <div class="form-group" data-aos="fade-up" data-aos-delay="300">
+                <div class="form-group">
                     <label><i class="fas fa-gem"></i> Jenis Jaminan</label>
                     <select class="form-control" id="jaminan" required>
                         <option value="" disabled selected>Pilih jenis jaminan</option>
@@ -1073,23 +1176,19 @@
                         <option value="Elektronik">Elektronik (Laptop/HP/TV)</option>
                     </select>
                 </div>
-
-                <div class="form-group" data-aos="fade-up" data-aos-delay="350">
+                <div class="form-group">
                     <label><i class="fas fa-briefcase"></i> Tujuan Pinjaman</label>
                     <input type="text" class="form-control" id="tujuan" required>
                 </div>
-
-                <div class="form-group" data-aos="fade-up" data-aos-delay="400">
+                <div class="form-group">
                     <label><i class="fas fa-comment"></i> Catatan Tambahan (opsional)</label>
                     <input type="text" class="form-control" id="catatan">
                 </div>
 
-                <!-- Total Pengembalian -->
-                <div class="total-card" data-aos="zoom-in" data-aos-delay="450">
+                <!-- TOTAL CARD -->
+                <div class="total-card">
                     <div class="total-row">
-                        <span class="total-label">
-                            <i class="fas fa-coins"></i> Pinjaman Pokok
-                        </span>
+                        <span class="total-label"><i class="fas fa-coins"></i> Pinjaman Pokok</span>
                         <span class="total-value" id="pokokDisplay">Rp 0</span>
                     </div>
                     <div class="total-row">
@@ -1099,38 +1198,30 @@
                         </span>
                         <span class="total-value" id="tambahanDisplay">Rp 0</span>
                     </div>
-                    
                     <div class="total-highlight">
                         <div class="total-label">Total Pengembalian (30 Hari)</div>
                         <div class="total-value" id="totalDisplay">Rp 0</div>
-                        <p style="font-size: 13px; color: var(--neutral-600); margin-top: 8px;">Sudah termasuk kontribusi mitra 10rb per 100rb</p>
                     </div>
                 </div>
 
-                <!-- Informasi Keterlambatan -->
-                <div class="late-charge-card" data-aos="fade-right" data-aos-delay="500">
+                <!-- LATE CHARGE CARD -->
+                <div class="late-charge-card">
                     <div class="late-charge-title">
                         <i class="fas fa-clock"></i>
                         <span>Ketentuan Keterlambatan</span>
                     </div>
-                    
                     <div class="late-charge-item">
-                        <span class="late-charge-label">Tambahan per bulan keterlambatan</span>
+                        <span class="late-charge-label">Tambahan per bulan</span>
                         <span class="late-charge-value">10rb/100rb</span>
                     </div>
-                    
                     <div class="late-example">
                         <i class="fas fa-calculator"></i> 
                         <strong>Ilustrasi:</strong> Pinjaman Rp500.000 jatuh tempo Rp550.000. Jika terlambat 1 bulan menjadi Rp600.000, terlambat 2 bulan menjadi Rp650.000.
                     </div>
-                    
-                    <p style="font-size: 13px; color: var(--neutral-600); margin-top: 16px; font-style: italic;">
-                        *Komunikasi adalah prioritas kami. Jika ada kendala, diskusikan dengan kami.
-                    </p>
                 </div>
 
-                <!-- Sistem Jaminan -->
-                <div class="jaminan-card" data-aos="fade-left" data-aos-delay="550">
+                <!-- JAMINAN CARD -->
+                <div class="jaminan-card">
                     <div class="jaminan-title">
                         <i class="fas fa-shield-alt"></i>
                         <span>Sistem Jaminan</span>
@@ -1140,90 +1231,91 @@
                         <li><i class="fas fa-check-circle"></i> Dikembalikan 100% saat pelunasan</li>
                         <li><i class="fas fa-check-circle"></i> Pencairan dilakukan secara langsung (tatap muka)</li>
                     </ul>
-                    
                     <div class="jaminan-diskusi">
                         <i class="fas fa-handshake"></i>
                         <span>Jaminan dapat didiskusikan sesuai kesepakatan bersama</span>
                     </div>
                 </div>
 
-                <button type="button" class="btn btn-primary" id="submitBtn" data-aos="fade-up" data-aos-delay="600">
+                <!-- SUBMIT BUTTON -->
+                <button type="button" class="btn" id="submitBtn">
                     <i class="fab fa-whatsapp"></i> Kirim Pengajuan via WhatsApp
                 </button>
-
-                <p class="disclaimer" data-aos="fade-up" data-aos-delay="650">
+                <p class="disclaimer">
                     Dengan mengirimkan form, Anda menyetujui syarat dan ketentuan yang berlaku di Youth Fund.
                 </p>
             </form>
         </div>
     </main>
 
-    <!-- Footer -->
+    <!-- FOOTER -->
     <footer class="footer">
         <div class="container">
-            <div data-aos="fade-up">
-                <h4>Youth Fund</h4>
-                <p>Mitra keuangan terpercaya yang mengutamakan transparansi, keamanan, dan kenyamanan dalam setiap proses pinjaman.</p>
-            </div>
-
-            <div class="footer-contact" data-aos="fade-right" data-aos-delay="100">
+            <h4>Youth Fund</h4>
+            <p>Mitra keuangan terpercaya yang mengutamakan transparansi, keamanan, dan kenyamanan dalam setiap proses pinjaman.</p>
+            <div class="footer-contact">
                 <i class="fab fa-whatsapp"></i>
                 <span>+62 895-8858-5691</span>
             </div>
-            
-            <div class="jam-operasional" data-aos="fade-right" data-aos-delay="150">
+            <div class="jam-operasional">
                 <i class="far fa-clock"></i>
                 <span>Senin - Sabtu, 07.00 - 17.00 WIB</span>
             </div>
-
-            <div class="copyright" data-aos="fade-up" data-aos-delay="200">
-                © 2023 Youth Fund. All rights reserved.
+            <div class="copyright">
+                © 2025 Youth Fund. All rights reserved.
             </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- SCRIPTS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Initialize AOS
+        // INIT AOS dengan konfigurasi ringan untuk mobile
         AOS.init({
-            duration: 800,
+            duration: 600,
             once: true,
-            offset: 50,
-            easing: 'ease-in-out'
+            offset: 20,
+            disable: window.innerWidth < 640 ? true : false
         });
 
-        // Loading Overlay
+        // LOADING OVERLAY
         window.addEventListener('load', function() {
             setTimeout(function() {
                 document.getElementById('loadingOverlay').classList.add('hidden');
-            }, 2000);
+            }, 1600);
         });
 
-        // Update Total Function
+        // UPDATE TOTAL FUNCTION
         function updateTotal() {
-            const jumlahSelect = document.getElementById('jumlah');
-            const pokokDisplay = document.getElementById('pokokDisplay');
-            const tambahanDisplay = document.getElementById('tambahanDisplay');
-            const totalDisplay = document.getElementById('totalDisplay');
+            const jumlah = document.getElementById('jumlah').value;
+            const pokokEl = document.getElementById('pokokDisplay');
+            const tambahanEl = document.getElementById('tambahanDisplay');
+            const totalEl = document.getElementById('totalDisplay');
 
-            if (!jumlahSelect.value) {
-                pokokDisplay.textContent = 'Rp 0';
-                tambahanDisplay.textContent = 'Rp 0';
-                totalDisplay.textContent = 'Rp 0';
+            if (!jumlah) {
+                pokokEl.textContent = 'Rp 0';
+                tambahanEl.textContent = 'Rp 0';
+                totalEl.textContent = 'Rp 0';
                 return;
             }
 
-            const jumlah = parseInt(jumlahSelect.value);
-            const tambahan = (jumlah / 100000) * 10000;
-            const total = jumlah + tambahan;
+            const jumlahNum = parseInt(jumlah);
+            const tambahan = (jumlahNum / 100000) * 10000;
+            const total = jumlahNum + tambahan;
 
-            pokokDisplay.textContent = `Rp ${jumlah.toLocaleString('id-ID')}`;
-            tambahanDisplay.textContent = `Rp ${tambahan.toLocaleString('id-ID')}`;
-            totalDisplay.textContent = `Rp ${total.toLocaleString('id-ID')}`;
+            pokokEl.textContent = `Rp ${jumlahNum.toLocaleString('id-ID')}`;
+            tambahanEl.textContent = `Rp ${tambahan.toLocaleString('id-ID')}`;
+            totalEl.textContent = `Rp ${total.toLocaleString('id-ID')}`;
         }
 
-        // Submit to WhatsApp
+        // FLOATING WA BUTTON - AUTO TEXT
+        document.getElementById('waFloatBtn').addEventListener('click', function() {
+            const pesan = `Halo kak, izin bertanya. Saya tertarik untuk mengajukan pinjaman dana tunai di Youth Fund. Mohon informasinya lebih lanjut ya, kak. Terima kasih.`;
+            const nomorTujuan = '628895885691';
+            window.open(`https://wa.me/${nomorTujuan}?text=${encodeURIComponent(pesan)}`, '_blank');
+        });
+
+        // SUBMIT FORM BUTTON
         document.getElementById('submitBtn').addEventListener('click', function() {
             const nama = document.getElementById('nama').value.trim();
             const wa = document.getElementById('wa').value.trim();
@@ -1235,61 +1327,55 @@
             const tujuan = document.getElementById('tujuan').value.trim();
             const catatan = document.getElementById('catatan').value.trim();
 
-            if (!nama || !wa || !usia || !domisili || !jumlah || !tenor || !jaminan || !tujuan) {
-                alert('Harap lengkapi semua field yang wajib diisi');
+            if (!nama || !wa || !usia || !domisili || !jumlah || !jaminan || !tujuan) {
+                alert('Mohon lengkapi semua field yang wajib diisi');
                 return;
             }
 
-            let waFormat = wa;
-            if (waFormat.startsWith('0')) {
-                waFormat = '62' + waFormat.substring(1);
-            }
-            waFormat = waFormat.replace(/\D/g, '');
-
-            const nomorTujuan = '628895885691';
-
+            // Format nomor WA
+            let waFormat = wa.replace(/\D/g, '');
+            if (waFormat.startsWith('0')) waFormat = '62' + waFormat.slice(1);
+            
             const jumlahNum = parseInt(jumlah);
             const tambahan = (jumlahNum / 100000) * 10000;
-            const totalKembali = jumlahNum + tambahan;
-            const chargePerBulan = (jumlahNum / 100000) * 10000;
+            const total = jumlahNum + tambahan;
+            const charge = (jumlahNum / 100000) * 10000;
 
             const pesan = `*YOUTH FUND - PENGAJUAN PINJAMAN*
 
+━━━━━━━━━━━━━━━━━━━
 DATA PEMOHON:
-• Nama: ${nama}
+━━━━━━━━━━━━━━━━━━━
+• Nama Lengkap: ${nama}
 • WhatsApp: ${wa}
-• Usia: ${usia}
+• Usia: ${usia} tahun
 • Domisili: ${domisili}
 
+━━━━━━━━━━━━━━━━━━━
 DETAIL PINJAMAN:
+━━━━━━━━━━━━━━━━━━━
 • Jumlah: Rp ${jumlahNum.toLocaleString('id-ID')}
 • Tenor: ${tenor}
 • Jaminan: ${jaminan}
 • Tujuan: ${tujuan}
 • Catatan: ${catatan || '-'}
 
+━━━━━━━━━━━━━━━━━━━
 RINCIAN PENGEMBALIAN:
+━━━━━━━━━━━━━━━━━━━
 • Pinjaman Pokok: Rp ${jumlahNum.toLocaleString('id-ID')}
 • Kontribusi Mitra: Rp ${tambahan.toLocaleString('id-ID')}
-• Total Pengembalian: Rp ${totalKembali.toLocaleString('id-ID')}
+• Total Pengembalian: Rp ${total.toLocaleString('id-ID')}
+• Denda Keterlambatan: Rp ${charge.toLocaleString('id-ID')} per bulan
 
-KETENTUAN KETERLAMBATAN:
-Tambahan Rp ${chargePerBulan.toLocaleString('id-ID')} per bulan keterlambatan.
+━━━━━━━━━━━━━━━━━━━
+Saya mengajukan pinjaman dan setuju untuk mendiskusikan lebih lanjut. Terima kasih.`;
 
-Saya mengajukan pinjaman dan setuju untuk mendiskusikan lebih lanjut.`;
-
-            const pesanEncoded = encodeURIComponent(pesan);
-            const urlWA = `https://wa.me/${nomorTujuan}?text=${pesanEncoded}`;
-            window.open(urlWA, '_blank');
+            window.open(`https://wa.me/628895885691?text=${encodeURIComponent(pesan)}`, '_blank');
         });
 
-        // Initial update if jumlah selected
-        window.addEventListener('load', function() {
-            const jumlahSelect = document.getElementById('jumlah');
-            if (jumlahSelect.value) {
-                updateTotal();
-            }
-        });
+        // Trigger update total
+        window.addEventListener('load', updateTotal);
     </script>
 </body>
 </html>
